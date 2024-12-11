@@ -6,7 +6,7 @@
 
 - **Nhóm sinh viên thực hiện:** Nhóm 06
 - **Mã số sinh viên:** 
-  - Nguyễn Huỳnh Thảo Vy (MSSV: 2254810305) - Nhóm Trưởng
+  - Nguyễn Huỳnh Thảo Vy (MSSV: 2254810305)
   - Đoàn Thị Bích Tuyền (MSSV: 2254810143)
 - **Lớp:** 010100086403
 - **Giảng viên hướng dẫn:**
