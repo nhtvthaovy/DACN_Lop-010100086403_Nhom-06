@@ -117,7 +117,7 @@
                                 </li>
                                 <!-- Search Box End -->
                                 <li><a href=""><i class="pe-7s-like"></i></a></li>
-                                <li><i class="pe-7s-shopbag"></i>
+                                <li><a href="{{URL::to('/show-cart')}}"><i class="pe-7s-shopbag"></i></a></li>
 
                                     
                                 </li>
