@@ -80,6 +80,10 @@ Route::get('/thank-momo/{orderid}', 'App\Http\Controllers\CheckoutController@tha
 Route::post('/momo-payment', 'App\Http\Controllers\CheckoutController@momo_payment');
 
 
+
+Route::get('/wishlist', 'App\Http\Controllers\HomeController@wishlist');
+
+
 //Backend
 
 // send mail

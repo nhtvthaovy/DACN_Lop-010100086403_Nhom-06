@@ -1,3 +1,4 @@
+
 @extends('layout')
 
 @section('content')
@@ -22,8 +23,10 @@
                 <div class="col-12">
                     <div class="breadcrumb-content text-center ptb-70">
                         <br>
+                        <br>
                         <h1>Chi Tiết Sản Phẩm</h1>
                         <ul class="breadcrumb-list breadcrumb">
+                            <br>
                             <li><a href="#">Trang Chủ</a></li>
                             <li><a href="#">Chi Tiết Sản Phẩm</a></li>
                         </ul>
@@ -121,7 +124,59 @@
                                 <button class="add-to-cart" disabled>Hết hàng</button>
                             @endif
                             
-                            <a href="wish-list.html" data-bs-toggle="tooltip" title="Add to Wishlist" class="same-btn mr-15"><i class="pe-7s-like"></i></a>
+                            <a href="javascript:void(0);" onclick="addToWishlist({{$pro->product_id}})" class="same-btn mr-15" data-bs-toggle="tooltip" title="Add to Wishlist">
+                                <i class="pe-7s-like" id="wishlist-icon-{{$pro->product_id}}"></i> <!-- Màu tim ban đầu là hồng -->
+                            </a>
+                            
+                            <script>
+                                var customerId = "<?php echo session('customer_id') ? session('customer_id') : ''; ?>"; 
+                                console.log("Customer ID from PHP session: ", customerId);  
+                            
+                                // Hàm thêm sản phẩm vào Wishlist và lưu vào localStorage
+                                function addToWishlist(productId) {
+                                    if (!customerId) {
+                                        alert("Vui lòng đăng nhập để thêm sản phẩm vào danh sách yêu thích.");
+                                        return; 
+                                    }
+                            
+                                    let wishlistKey = 'wishlist_' + customerId;
+                            
+                                    let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+                            
+                                    let heartIcon = document.getElementById('wishlist-icon-' + productId);
+                            
+                                    if (!wishlist.includes(productId)) {
+                                        wishlist.push(productId);
+                                        localStorage.setItem(wishlistKey, JSON.stringify(wishlist)); 
+                            
+                                        heartIcon.style.color = "red";
+                                        alert("Sản phẩm đã được thêm vào danh sách yêu thích!");
+                                    } else {
+                                        wishlist = wishlist.filter(id => id !== productId);
+                                        localStorage.setItem(wishlistKey, JSON.stringify(wishlist)); 
+                            
+                                        alert("Sản phẩm đã bị xóa khỏi danh sách yêu thích.");
+                                        location.reload(); 
+                                    }
+                                }
+                            
+                                window.onload = function() {
+                                    let wishlistKey = 'wishlist_' + customerId;
+                                    let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+                            
+                                    wishlist.forEach(function(productId) {
+                                        let heartIcon = document.getElementById('wishlist-icon-' + productId);
+                                        if (heartIcon) {
+                                            heartIcon.style.color = "red"; 
+                                        }
+                                    });
+                                };
+                            </script>
+                            
+                            
+
+                            
+                            
                         </div>
                         <!-- Product Button Actions End -->
                         

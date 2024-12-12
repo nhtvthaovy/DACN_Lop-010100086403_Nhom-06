@@ -74,6 +74,17 @@ class HomeController extends Controller
             ->with('all_product', $all_product)
             ->with('keys', $keys);
     }
+
+
+
+
+    public function wishlist() {
+       
+   
+    
+        return view('pages.wishlist');
+
+    }
     
     
    

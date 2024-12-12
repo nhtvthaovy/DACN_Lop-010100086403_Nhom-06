@@ -116,7 +116,7 @@
                                     </ul>
                                 </li>
                                 <!-- Search Box End -->
-                                <li><a href=""><i class="pe-7s-like"></i></a></li>
+                                <li><a href="{{ URL::to('wishlist') }}"><i class="pe-7s-like"></i></a></li>
                                 <li><a href="{{URL::to('/show-cart')}}"><i class="pe-7s-shopbag"></i></a></li>
 
                                 <!-- Dropdown Currency Selection Start -->

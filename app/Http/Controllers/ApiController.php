@@ -163,6 +163,7 @@ class ApiController extends Controller
 
     // customer
 
+
     public function getCustomerOrders($customerId)
     {
         $orders = OrderModel::where('customer_id', $customerId)->get();
@@ -191,6 +192,18 @@ class ApiController extends Controller
             'success' => true,
             'order' => $order
         ]);
+    }
+
+
+    // w
+        public function getProductsByIds(Request $request)
+    {
+        $productIds = $request->input('product_ids', []);
+
+        // Truy vấn các sản phẩm từ cơ sở dữ liệu theo ID
+        $products = ProductModel::whereIn('product_id', $productIds)->get();
+
+        return response()->json($products);
     }
     
 }

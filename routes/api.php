@@ -39,3 +39,5 @@ Route::get('/shop', [ApiController::class, 'shop']);
 Route::get('/orders/{customerId}', [ApiController::class, 'getCustomerOrders']);
 
 Route::get('/details_orders/{orderId}', [ApiController::class, 'DetailsOrders']);
+
+Route::post('/get-products-by-ids', [ApiController::class, 'getProductsByIds']);
