@@ -81,7 +81,7 @@
                                     <li><a href="{{ URL::to('shop') }}">Cửa Hàng</a>                                       
                                     </li>
 
-                                    <li><a href="#">Bài Viết</a>                                       
+                                    <li><a href="{{ URL::to('post') }}">Bài Viết</a>                                       
                                     </li>
                                    
                                     

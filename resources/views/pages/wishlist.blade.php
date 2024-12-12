@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center ptb-70">
-                        <h1>CỬA HÀNG</h1>
+                        <h1>Yêu Thích</h1>
                         <ul class="breadcrumb-list breadcrumb">
                             <li><a href="#">Trang Chủ</a></li>
                             <li><a href="#">Yêu Thích</a></li>

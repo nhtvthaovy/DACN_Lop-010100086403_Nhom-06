@@ -4,6 +4,7 @@ use App\Exports\CategoryProductExport;
 use App\Exports\ProductExport;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use Carbon\Carbon;
@@ -83,6 +84,10 @@ Route::post('/momo-payment', 'App\Http\Controllers\CheckoutController@momo_payme
 
 Route::get('/wishlist', 'App\Http\Controllers\HomeController@wishlist');
 
+Route::get('/post', 'App\Http\Controllers\PostController@post');
+Route::get('post/{post_id}', [PostController::class, 'showPost'])->name('post-detail');
+
+
 
 //Backend
 
@@ -121,6 +126,19 @@ Route::middleware(['auth:admin', 'role:admin,owner,moderator'])->group(function 
     // Route::post('/update-category-product/{category_product_id}', 'App\Http\Controllers\CategoryController@update_category_product');
 
     Route::post('/import-category-product', [CategoryController::class, 'importCategoryProduct'])->name('import.category.product');
+
+
+    // Post
+    Route::get('/add-post', 'App\Http\Controllers\PostController@add_post');
+    Route::get('/all-post', 'App\Http\Controllers\PostController@all_post')->name('all-post');
+    Route::post('save-post', [PostController::class, 'savePost']);
+    Route::get('/active-post/{post_id}', [PostController::class, 'active_post']);
+    Route::get('/unactive-post/{post_id}', [PostController::class, 'unactive_post']);
+    Route::get('/edit-post/{post_id}', [PostController::class, 'edit_post'])->name('edit-post');
+    Route::post('/update-post/{post_id}', [PostController::class, 'update_post']);
+    Route::get('/delete-post/{post_id}', [PostController::class, 'delete_post'])->name('delete-post');
+
+
 
 
     Route::get('export-category', function () {
