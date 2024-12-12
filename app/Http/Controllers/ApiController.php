@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryModel;
+use App\Models\OrderModel;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -144,6 +145,52 @@ class ApiController extends Controller
         $categories = CategoryModel::paginate(10);
 
         return response()->json($categories);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // customer
+
+    public function getCustomerOrders($customerId)
+    {
+        $orders = OrderModel::where('customer_id', $customerId)->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $orders,
+        ]);
+    }
+
+
+
+    public function DetailsOrders($orderId)
+    {
+        $order = OrderModel::with(['orderDetails', 'customer', 'shipping', 'payment'])
+            ->find($orderId);
+
+        if (!$order) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Đơn hàng không tồn tại.'
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'order' => $order
+        ]);
     }
     
 }

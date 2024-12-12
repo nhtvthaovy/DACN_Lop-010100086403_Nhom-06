@@ -3,6 +3,7 @@
 use App\Exports\CategoryProductExport;
 use App\Exports\ProductExport;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use Carbon\Carbon;
@@ -66,6 +67,13 @@ Route::get('/thank-handcash/{orderid}', 'App\Http\Controllers\CheckoutController
 // Route::post('/vnpay-payment', 'App\Http\Controllers\CheckoutController@vnpay_payment');
 
 Route::get('/momo-o', 'App\Http\Controllers\CheckoutController@momo_o');
+
+
+Route::get('/order', 'App\Http\Controllers\CheckoutController@order');
+Route::post('/orderid', 'App\Http\Controllers\CheckoutController@orderid');
+
+Route::get('/account', 'App\Http\Controllers\CustomerController@account');
+Route::post('/customer/account/update', [CustomerController::class, 'updateAccount'])->name('customer.update');
 
 
 Route::get('/thank-momo/{orderid}', 'App\Http\Controllers\CheckoutController@thank_momo');
@@ -189,7 +197,7 @@ Route::middleware(['auth:admin', 'role:admin,owner'])->group(function () {
     Route::post('update-user/{id}', 'App\Http\Controllers\AuthController@update_user');
 
 
-    Route::get('/manage', 'App\Http\Controllers\CheckoutController@manage_review');
+Route::get('/manage', 'App\Http\Controllers\AuthController@manage')->name('admin.manage');
 
 
 });

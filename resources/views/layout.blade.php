@@ -119,8 +119,6 @@
                                 <li><a href=""><i class="pe-7s-like"></i></a></li>
                                 <li><a href="{{URL::to('/show-cart')}}"><i class="pe-7s-shopbag"></i></a></li>
 
-                                    
-                                </li>
                                 <!-- Dropdown Currency Selection Start -->
                                 <li><i class="pe-7s-config"></i>
                                     <ul class="ht-dropdown currrency">
@@ -132,7 +130,18 @@
                                                 if ($customer_id != null) {
                                                     // Nếu có customer_id thì hiển thị "Đăng Xuất"
                                                 ?>
+                                                
+<li><a href="{{ URL::to('account') }}">Tài Khoản</a></li>
+
+
+<li><a href="{{ URL::to('order') }}">Đơn Hàng</a></li>
+                                                    
+
+                                                    <br>
+                                                    <hr>
                                                     <li><a href="{{ URL::to('logout-checkout') }}">Đăng Xuất</a></li>
+                                                    
+
                                                 <?php
                                                 } else {
                                                     // Nếu không có customer_id thì hiển thị "Đăng Nhập"

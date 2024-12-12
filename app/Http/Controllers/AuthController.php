@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminModel;
+use App\Models\OrderDetailsModel;
 use App\Models\RoleModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
+
 
 class AuthController extends Controller
 {
@@ -88,6 +91,57 @@ class AuthController extends Controller
         'admin_password' => 'Thông tin đăng nhập không chính xác.',
     ]);
     }
+
+
+
+    // manage
+
+        public function manage(Request $request)
+        {
+            // Kiểm tra người dùng chọn nhóm theo ngày, tháng hay năm
+            $groupBy = $request->input('group_by', 'day'); // Mặc định là theo ngày
+    
+            // Truy vấn dữ liệu theo ngày, tháng, hoặc năm
+            if ($groupBy == 'month') {
+                // Nhóm theo tháng-năm (yyyy-mm)
+                $salesData = OrderDetailsModel::join('tbl_order', 'tbl_order_details.order_id', '=', 'tbl_order.order_id')
+                    ->where('tbl_order.order_status', 'completed') // Chỉ tính đơn hàng đã hoàn thành
+                    ->selectRaw('SUM(tbl_order_details.product_sales_qty * tbl_order_details.product_price) as total_sales, DATE_FORMAT(tbl_order.created_at, "%Y-%m") as period')
+                    ->groupBy(DB::raw('DATE_FORMAT(tbl_order.created_at, "%Y-%m")')) // Nhóm theo tháng-năm
+                    ->orderBy('period')
+                    ->get();
+            } elseif ($groupBy == 'year') {
+                // Nhóm theo năm
+                $salesData = OrderDetailsModel::join('tbl_order', 'tbl_order_details.order_id', '=', 'tbl_order.order_id')
+                    ->where('tbl_order.order_status', 'completed')
+                    ->selectRaw('SUM(tbl_order_details.product_sales_qty * tbl_order_details.product_price) as total_sales, YEAR(tbl_order.created_at) as period')
+                    ->groupBy(DB::raw('YEAR(tbl_order.created_at)')) // Nhóm theo năm
+                    ->orderBy('period')
+                    ->get();
+            } else {
+                // Nhóm theo ngày (ngày-tháng-năm)
+                $salesData = OrderDetailsModel::join('tbl_order', 'tbl_order_details.order_id', '=', 'tbl_order.order_id')
+                    ->where('tbl_order.order_status', 'completed')
+                    ->selectRaw('SUM(tbl_order_details.product_sales_qty * tbl_order_details.product_price) as total_sales, DATE(tbl_order.created_at) as period')
+                    ->groupBy(DB::raw('DATE(tbl_order.created_at)')) // Nhóm theo ngày
+                    ->orderBy('period')
+                    ->get();
+            }
+
+            
+    
+
+    // Thêm thống kê sản phẩm bán được
+    $productSalesData = OrderDetailsModel::join('tbl_order', 'tbl_order_details.order_id', '=', 'tbl_order.order_id')
+        ->where('tbl_order.order_status', 'completed')
+        ->selectRaw('product_name, SUM(product_sales_qty) as total_sales')
+        ->groupBy('product_name')
+        ->orderByDesc('total_sales')
+        ->get();
+
+    // Truyền dữ liệu vào view
+    return view('admin.manage', compact('salesData', 'groupBy', 'productSalesData'));
+        }
 
 
 

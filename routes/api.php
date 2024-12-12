@@ -35,3 +35,7 @@ Route::middleware(['web', 'auth:admin', 'role:admin,owner,moderator'])->group(fu
 });
 
 Route::get('/shop', [ApiController::class, 'shop']);
+
+Route::get('/orders/{customerId}', [ApiController::class, 'getCustomerOrders']);
+
+Route::get('/details_orders/{orderId}', [ApiController::class, 'DetailsOrders']);

@@ -74,23 +74,7 @@
 
 <div class="card-body px-0">
     <div class="table-responsive">
-        <table id="order-list-table-2" class="table table-striped" role="grid" data-toggle="data-table" data-language='{
-            "sProcessing": "Đang xử lý...",
-            "sLengthMenu": "Hiển thị _MENU_ mục",
-            "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-            "sInfo": "",
-            "sInfoEmpty": "",
-            "sInfoFiltered": "",
-            "sInfoPostFix": "",
-            "sSearch": "Tìm:",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "",
-                "sPrevious": "<",
-                "sNext": ">",
-                "sLast": ""
-            }
-        }'>
+        <table id="order-list-table-2" class="table table-striped" role="grid" data-toggle="data-table">
             <thead>
                 <tr class="ligth">
                     <th>Tên sản phẩm</th>
@@ -112,11 +96,7 @@
                 @endforeach
             </tbody>
         </table>
-        <script>
-            $(document).ready(function () {
-                $('#order-list-table').DataTable();
-            });
-        </script>
+
     </div>
 </div>
 

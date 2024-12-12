@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderDetailsModel;
 use App\Models\OrderModel;
 use App\Models\PaymentModel;
 use App\Models\ProductModel;
@@ -125,19 +126,21 @@ class CheckoutController extends Controller
 //// order_details
 foreach (Session::get('cart') as $key => $cart) {
     // Thêm sản phẩm vào chi tiết đơn hàng
-    $data_orderd = array();
-    $data_orderd['order_id'] = $order_id;
-    $data_orderd['product_id'] = $cart['product_id'];
-    $data_orderd['product_name'] = $cart['product_name']; 
-    $data_orderd['product_price'] = $cart['product_price'];
-    $data_orderd['product_sales_qty'] = $cart['product_qty'];
+    $orderDetail = new OrderDetailsModel();
+    $orderDetail->order_id = $order_id;
+    $orderDetail->product_id = $cart['product_id'];
+    $orderDetail->product_name = $cart['product_name']; 
+    $orderDetail->product_price = $cart['product_price'];
+    $orderDetail->product_sales_qty = $cart['product_qty'];
 
-    $orderd_id = DB::table('tbl_order_details')->insertGetId($data_orderd);
+    // Lưu vào bảng tbl_order_details
+    $orderDetail->save();
 
-
+    // Cập nhật số lượng sản phẩm trong kho
     $product = ProductModel::find($cart['product_id']); 
     if ($product) {
         if ($product->product_quantity >= $cart['product_qty']) {
+            // Cập nhật số lượng sản phẩm và số lượng đã bán
             $product->product_quantity -= $cart['product_qty']; 
             $product->product_sold += $cart['product_qty']; 
             $product->save(); 
@@ -148,6 +151,7 @@ foreach (Session::get('cart') as $key => $cart) {
         return redirect()->back()->with('error', 'Sản phẩm không tồn tại!');
     }
 }
+
 
 Session::forget('cart');
 
@@ -490,6 +494,35 @@ if ($data_payment['payment_menthod'] == 1) {
         
 
 
+        public function order()
+        {
+            $customerId = Session::get('customer_id');
+        
+            if (!$customerId) {
+                return redirect('login-checkout')->with('message', 'Vui lòng đăng nhập để xem đơn hàng');
+            }
+        
+            return view('pages.customer.order', compact('customerId'));
+        }
+        
+
+
+
+        public function orderid(Request $request)
+        {
+            $orderId = $request->input('order_id'); // Nhận giá trị từ input ẩn
+        
+            $order = OrderModel::with(['payment', 'shipping', 'orderDetails'])  
+                ->where('order_id', $orderId)
+                ->first();
+        
+            if (!$order) {
+                return redirect()->back()->with('error', 'Không tìm thấy đơn hàng!');
+            }
+        
+            return view('pages.customer.details_order', compact('orderId', 'order'));
+        }
+        
                 
 }
       
