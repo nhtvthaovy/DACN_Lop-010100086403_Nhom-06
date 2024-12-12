@@ -17,7 +17,7 @@
             <div class="slider-text">
                 <h2 class="wow fadeInLeft" data-wow-delay="1s">products for your<br>home or office</h2>
                 <p class="wow fadeInRight" data-wow-delay="1s">designer lighting</p>
-                <a class="wow bounceInDown" data-wow-delay="0.8s" href="#">Cửa Hàng</a>
+                <a class="wow bounceInDown" data-wow-delay="0.8s" href{{ URL::to('shop') }}">Cửa Hàng</a>
             </div>
             <!-- Slider Text End -->
         </div>
@@ -28,7 +28,7 @@
             <div class="slider-text">
                 <h2 class="wow zoomInUp" data-wow-delay="0.5s">hanging and lanterns<br>and sconces</h2>
                 <p class="wow zoomInUp" data-wow-delay="0.6s">style for every space</p>
-                <a class="wow zoomInUp" data-wow-delay="1s" href="#">Cửa Hàng</a>
+                <a class="wow zoomInUp" data-wow-delay="1s" href="{{ URL::to('shop') }}">Cửa Hàng</a>
             </div>
             <!-- Slider Text End -->
         </div>
@@ -48,7 +48,7 @@
                     <div class="banner-content">
                         <h5>Đèn Vườn</h5>
                         <h3>Giảm Giá</h3>
-                        <a href="categorie-page.html">Cửa Hàng</a>
+                        <a href="{{ URL::to('shop') }}">Cửa Hàng</a>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <div class="banner-content">
                         <h5>Trang Trí Nội Thất </h5>
                         <h3>Giảm 30%</h3>
-                        <a href="categorie-page.html">Cửa Hàng</a>
+                        <a href="{{ URL::to('shop') }}">Cửa Hàng</a>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                     <div class="banner-content">
                         <h5>Bộ Sưu Tập Mới</h5>
                         <h3>Đèn Trần</h3>
-                        <a href="categorie-page.html">Cửa Hàng</a>
+                        <a href="{{ URL::to('shop') }}">Cửa Hàng</a>
                     </div>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                 <div class="big-banner text-center">
                     <div class="big-banner-desc">
                         <h2>Sáng Tạo Nội Thất</h2>
-                        <a href="categorie-page.html">Xem Thêm</a>
+                        <a href="{{ URL::to('shop') }}">Xem Thêm</a>
                     </div>
                 </div>
             </div>
@@ -224,7 +224,7 @@
                                 <h4><a href="{{URL::to('/product-detail/'.$product->product_id)}}">{{ $product->product_name }}</a></h4>
                                 <p class="price"><span>{{ number_format($product->product_price, 0, ',', '.') }}₫</span></p>
                                 <div class="action-links2">
-                                    <a data-bs-toggle="tooltip" title="" href="cart.html">Xem Thêm</a>
+                                    <a data-bs-toggle="tooltip" title="" href="{{URL::to('/product-detail/'.$product->product_id)}}">Xem Thêm</a>
                                 </div>
                             </div>
                             <!-- Product Content End -->
@@ -261,15 +261,15 @@
                     <!-- Single Blog Start -->
                     <div class="single-blog">
                         <div class="blog-img">
-                            <a href="blog-details.html"><img src="{{ asset('frontend/img/blog/1.jpg')}}" alt="blog-image"></a>
+                            <a href="{{ URL::to('post') }}"><img src="{{ asset('frontend/img/blog/1.jpg')}}" alt="blog-image"></a>
                         </div>
                         <div class="blog-content">
                             <div class="blog-content-upper">
-                                <h6 class="blog-title"><a href="blog-details.html">Amber Interiors</a></h6>
+                                <h6 class="blog-title"><a href="{{ URL::to('post') }}">Amber Interiors</a></h6>
                                 <p>Interior designer Amber Lewis’s blog takes you inside the creative workings of her Los Angeles–based studio.</p>
                             </div>
                             <div class="blog-content-lower">
-                                <a href="https://themeforest.net/user/Nevara">Nevara</a>
+                                <a href="{{ URL::to('post') }}">Nevara</a>
                                 <span class="f-right">05 Nov, 2022</span>
                             </div>
                         </div>
@@ -278,15 +278,15 @@
                      <!-- Single Blog Start -->
                     <div class="single-blog">
                         <div class="blog-img">
-                            <a href="blog-details.html"><img src="{{ asset('frontend/img/blog/2.jpg')}}" alt="blog-image"></a>
+                            <a href="{{ URL::to('post') }}"><img src="{{ asset('frontend/img/blog/2.jpg')}}" alt="blog-image"></a>
                         </div>
                         <div class="blog-content">
                             <div class="blog-content-upper">
-                                <h6 class="blog-title"><a href="blog-details.html">Coco Lapine Design</a></h6>
+                                <h6 class="blog-title"><a href="{{ URL::to('post') }}">Coco Lapine Design</a></h6>
                                 <p>The blog of Belgian designer Sarah Van Peteghem, Coco Lapine Design is the space where she shares all.</p>
                             </div>
                             <div class="blog-content-lower">
-                                <a href="https://themeforest.net/user/Nevara">Nevara</a>
+                                <a href="{{ URL::to('post') }}">Nevara</a>
                                 <span class="f-right">04 Oct, 2022</span>
                             </div>
                         </div>
@@ -295,15 +295,15 @@
                     <!-- Single Blog Start -->
                     <div class="single-blog">
                         <div class="blog-img">
-                            <a href="blog-details.html"><img src="{{ asset('frontend/img/blog/3.jpg')}}" alt="blog-image"></a>
+                            <a href="{{ URL::to('post') }}"><img src="{{ asset('frontend/img/blog/3.jpg')}}" alt="blog-image"></a>
                         </div>
                         <div class="blog-content">
                             <div class="blog-content-upper">
-                                <h6 class="blog-title"><a href="blog-details.html">Style by Emily Henderson</a></h6>
+                                <h6 class="blog-title"><a href="{{ URL::to('post') }}">Style by Emily Henderson</a></h6>
                                 <p>The list wouldn’t be complete without the ever-stylish blog of interior design extraordinaire Emily Henderson.</p>
                             </div>
                             <div class="blog-content-lower">
-                                <a href="https://themeforest.net/user/Nevara">Nevara</a>
+                                <a href="{{ URL::to('post') }}">Nevara</a>
                                 <span class="f-right">16 Aug, 2022</span>
                             </div>
                         </div>

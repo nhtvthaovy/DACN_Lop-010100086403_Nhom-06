@@ -164,13 +164,13 @@
                     <div class="mobile-menu d-block d-lg-none">
                         <nav>
                             <ul>
-                                <li><a href="#">Trang Chủ</a>                                    
+                                <li><a href="{{ URL::to('home') }}">Trang Chủ</a>                                    
                                 </li>
                                 
-                                <li><a href="#">Cửa Hàng</a>                                       
+                                <li><a href="{{ URL::to('shop') }}">Cửa Hàng</a>                                       
                                 </li>
 
-                                <li><a href="#">Bài Viết</a>                                       
+                                <li><a href="{{ URL::to('post') }}">Bài Viết</a>                                       
                                 </li>
                                 
                                 </li>
